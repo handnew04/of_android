@@ -37,6 +37,14 @@ dependencies {
     implementation "com.google.android.material:material:$versions.material"
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
 
+    //network
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit2"
+
+    //firebase
+    implementation platform("com.google.firebase:firebase-bom:$versions.firebaseBom")
+    implementation "com.google.firebase:firebase-analytics-ktx"
+    implementation "com.google.firebase:firebase-messaging-ktx"
+
     //test
     testImplementation "junit:junit:$versions.junit"
     androidTestImplementation "androidx.test.ext:junit:$versions.androidxTestJunit"
