@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply from: "$rootDir/dependencies.gradle"
 
 android {
@@ -27,6 +28,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = '11'
+    }
+
+    buildFeatures {
+        dataBinding = true
     }
 }
 
