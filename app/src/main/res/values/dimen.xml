@@ -3,4 +3,6 @@
    <dimen name="toolbar_height">44dp</dimen>
    <dimen name="button_height">44dp</dimen>
    <dimen name="button_radius">8dp</dimen>
+   <dimen name="padding_side">40dp</dimen>
+   <dimen name="padding_side_wide">19dp</dimen>
 </resources>

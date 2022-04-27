@@ -1,3 +1,9 @@
 <resources>
    <string name="app_name">OF</string>
+   <string name="image">image</string>
+   <string name="login">Login</string>
+   <string name="forgot_password">Forgot Password?</string>
+   <string name="remember_me">Remember Me</string>
+   <string name="please_enter_your_e_mail">Please enter your e-mail</string>
+   <string name="password">Password</string>
 </resources>

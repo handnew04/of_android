@@ -3,36 +3,9 @@
 
    <style name="Font" />
 
-   <style name="Font.Black">
-      <item name="android:textColor">@color/black</item>
-   </style>
-
-   <style name="Font.Blue">
-      <item name="android:textColor">@color/blue_500</item>
-   </style>
-
-   <style name="Font.Red">
-      <item name="android:textColor">@color/red_500</item>
-   </style>
-
-   <style name="Font.Green">
-      <item name="android:textColor">@color/green_500</item>
-   </style>
-
-   <style name="Font.White">
-      <item name="android:textColor">@color/white</item>
-   </style>
-
-   <style name="Font.Gray">
-      <item name="android:textColor">@color/gray_600</item>
-   </style>
-
-   <style name="Font.DarkGray">
-      <item name="android:textColor">@color/gray_700</item>
-   </style>
-
-   <style name="Font.Title" parent="Font.Black">
+   <style name="Font.Title">
       <item name="android:textStyle">bold</item>
+      <item name="android:textColor">@color/black</item>
    </style>
 
    <style name="Font.Title.Display5">
@@ -71,13 +44,13 @@
       <item name="android:textSize">12sp</item>
    </style>
 
-   <style name="Font.Body"/>
+   <style name="Font.Body" />
 
-   <style name="Font.Body2">
+   <style name="Font.Body.Body2">
       <item name="android:textSize">16sp</item>
    </style>
 
-   <style name="Font.Body1">
+   <style name="Font.Body.Body1">
       <item name="android:textSize">14sp</item>
    </style>
 
