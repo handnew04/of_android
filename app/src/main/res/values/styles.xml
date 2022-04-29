@@ -37,4 +37,9 @@
         <item name="android:layout_height">@dimen/line_height</item>
         <item name="android:background">@color/gray_500</item>
     </style>
+
+    <style name="WarningDescription">
+        <item name="android:textAppearance">@style/Font.Body.Body1</item>
+        <item name="android:textColor">@color/red_500</item>
+    </style>
 </resources>
