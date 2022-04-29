@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-   <dimen name="toolbar_height">44dp</dimen>
-   <dimen name="button_height">44dp</dimen>
-   <dimen name="button_radius">8dp</dimen>
-   <dimen name="padding_side">40dp</dimen>
-   <dimen name="padding_side_wide">19dp</dimen>
+    <dimen name="toolbar_height">44dp</dimen>
+    <dimen name="button_height">44dp</dimen>
+    <dimen name="button_radius">8dp</dimen>
+    <dimen name="button_padding">10dp</dimen>
+    <dimen name="padding_side">40dp</dimen>
+    <dimen name="margin_middle">10dp</dimen>
+    <dimen name="padding_side_wide">19dp</dimen>
+    <dimen name="line_height">1dp</dimen>
 </resources>

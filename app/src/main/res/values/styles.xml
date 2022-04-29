@@ -1,34 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-   <style name="Toolbar">
-      <item name="android:background">@color/gray_700</item>
-      <item name="android:layout_height">@dimen/toolbar_height</item>
-      <item name="android:layout_width">match_parent</item>
-   </style>
+    <style name="Toolbar">
+        <item name="android:background">@color/gray_700</item>
+        <item name="android:layout_height">@dimen/toolbar_height</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
 
-   <style name="Button">
-      <item name="android:layout_height">@dimen/button_height</item>
-   </style>
+    <style name="Button">
+        <item name="android:layout_height">@dimen/button_height</item>
+    </style>
 
-   <style name="Button.Full" parent="Button">
-      <item name="android:textAppearance">@style/Font.Body.Body1</item>
-      <item name="android:layout_width">0dp</item>
-      <item name="android:gravity">center</item>
-   </style>
+    <style name="Button.Full" parent="Button">
+        <item name="android:textAppearance">@style/Font.Body.Body1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/button_padding</item>
+    </style>
 
-   <style name="Button.Full.Green">
-      <item name="android:background">@drawable/shape_button_green</item>
-      <item name="android:textColor">@color/white</item>
-   </style>
+    <style name="Button.Full.Green">
+        <item name="android:background">@drawable/shape_button_green</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 
-   <style name="Button.Full.Gray">
-      <item name="android:background">@drawable/shape_button_gray</item>
-      <item name="android:textColor">@color/gray_600</item>
-   </style>
+    <style name="Button.Full.Gray">
+        <item name="android:background">@drawable/shape_button_gray</item>
+        <item name="android:textColor">@color/gray_600</item>
+    </style>
 
-   <style name="Button.Stroke">
-      <item name="android:layout_width">0dp</item>
-      <item name="android:background">@drawable/shape_button_stroke</item>
-   </style>
+    <style name="Button.Stroke">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:background">@drawable/shape_button_stroke</item>
+    </style>
+
+    <style name="Line">
+        <item name="android:layout_height">@dimen/line_height</item>
+        <item name="android:background">@color/gray_500</item>
+    </style>
 </resources>
