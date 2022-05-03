@@ -18,7 +18,7 @@ ext.versions = [
         //koin
         koin                : '3.1.4',
 
-        //retrofit2
+        //network
         retrofit2           : '2.9.0',
         okHttp              : '4.9.1',
 

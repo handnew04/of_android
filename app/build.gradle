@@ -17,9 +17,14 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+            buildConfigField("String", "BASE_URL", "https://naver.com")
+        }
+        release {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", "https://naver.com")
         }
     }
     compileOptions {
@@ -49,6 +54,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$versions.retrofit2"
     implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit2"
     implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$versions.okHttp"
 
     //koin
     implementation "io.insert-koin:koin-core:$versions.koin"
