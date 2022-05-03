@@ -12,8 +12,15 @@ ext.versions = [
         material            : '1.5.0',
         constraintlayout    : '2.1.3',
 
+        //gson
+        gson                : '2.8.9',
+
+        //koin
+        koin                : '3.1.4',
+
         //retrofit2
         retrofit2           : '2.9.0',
+        okHttp              : '4.9.1',
 
         //firebase
         googleService       : '4.3.10',

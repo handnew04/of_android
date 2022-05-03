@@ -42,8 +42,17 @@ dependencies {
     implementation "com.google.android.material:material:$versions.material"
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
 
+    //gson
+    implementation "com.google.code.gson:gson:$versions.gson"
+
     //network
     implementation "com.squareup.retrofit2:retrofit:$versions.retrofit2"
+    implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit2"
+    implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
+
+    //koin
+    implementation "io.insert-koin:koin-core:$versions.koin"
+    implementation "io.insert-koin:koin-android:$versions.koin"
 
     //firebase
     implementation platform("com.google.firebase:firebase-bom:$versions.firebaseBom")
