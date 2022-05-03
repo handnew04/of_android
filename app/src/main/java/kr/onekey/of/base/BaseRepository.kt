@@ -1,4 +1,5 @@
 package kr.onekey.of.base
 
-class BaseRepository {
+abstract class BaseRepository {
+   protected var TAG: String = javaClass.name
 }
