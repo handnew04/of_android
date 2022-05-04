@@ -4,6 +4,9 @@
 
    <data>
 
+      <variable
+          name="viewModel"
+          type="kr.onekey.of.ui.login.LoginViewModel" />
    </data>
 
    <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,6 +36,7 @@
           android:hint="@string/please_enter_your_e_mail"
           android:importantForAutofill="no"
           android:inputType="textEmailAddress"
+          android:text="@={viewModel.inputId}"
           app:layout_constraintBottom_toTopOf="@id/et_pw"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
@@ -48,6 +52,7 @@
           android:importantForAutofill="no"
           android:inputType="textPassword"
           android:maxLines="1"
+          android:text="@={viewModel.inputPassword}"
           app:layout_constraintBottom_toTopOf="@+id/cb_auto_login"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
@@ -58,6 +63,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="@string/remember_me"
+          android:checked="@={viewModel.isAutoLogin()}"
           app:layout_constraintBottom_toTopOf="@id/tv_login"
           app:layout_constraintEnd_toStartOf="@id/tv_find_password"
           app:layout_constraintHorizontal_chainStyle="spread_inside"

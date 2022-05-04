@@ -6,13 +6,13 @@
    <data>
       <variable
           name="viewModel"
-          type="kr.onekey.of.ui.MainViewModel" />
+          type="kr.onekey.of.ui.main.MainViewModel" />
    </data>
 
    <androidx.constraintlayout.widget.ConstraintLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       tools:context=".ui.MainActivity">
+       tools:context=".ui.main.MainActivity">
 
       <TextView
           android:layout_width="wrap_content"

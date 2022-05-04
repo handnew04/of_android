@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import kr.onekey.of.BR
-import kr.onekey.of.databinding.ToolbarBinding
 
 abstract class BaseActivity<VDB : ViewDataBinding, VM : BaseViewModel>(
    @LayoutRes
@@ -15,7 +14,7 @@ abstract class BaseActivity<VDB : ViewDataBinding, VM : BaseViewModel>(
    protected lateinit var binding: VDB
    protected abstract val viewModel: VM
    protected lateinit var TAG: String
-   protected lateinit var toolbar: ToolbarBinding
+   //protected lateinit var toolbar: ToolbarBinding
 
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
@@ -28,17 +27,17 @@ abstract class BaseActivity<VDB : ViewDataBinding, VM : BaseViewModel>(
       }
    }
 
-   fun initToolbar(toolbar: ToolbarBinding) {
-      this.toolbar = toolbar
-
-      this.toolbar.apply {
-         ivBackArrow.setOnClickListener {
-            finish()
-         }
-      }
-   }
-
-   fun setToolbar(title: String) {
-      toolbar.tvTitle.text = title
-   }
+//   fun initToolbar(toolbar: ToolbarBinding) {
+//      this.toolbar = toolbar
+//
+//      this.toolbar.apply {
+//         ivBackArrow.setOnClickListener {
+//            finish()
+//         }
+//      }
+//   }
+//
+//   fun setToolbar(title: String) {
+//      toolbar.tvTitle.text = title
+//   }
 }
