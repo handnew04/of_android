@@ -67,6 +67,12 @@ dependencies {
     implementation "com.google.firebase:firebase-analytics-ktx"
     implementation "com.google.firebase:firebase-messaging-ktx"
 
+    //circle imageView
+    implementation "de.hdodenhof:circleimageview:$versions.circleImageView"
+
+    //glide
+    implementation "com.github.bumptech.glide:glide:$versions.glide"
+
     //test
     testImplementation "junit:junit:$versions.junit"
     androidTestImplementation "androidx.test.ext:junit:$versions.androidxTestJunit"
