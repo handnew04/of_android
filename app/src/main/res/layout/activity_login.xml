@@ -63,7 +63,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="@string/remember_me"
-          android:checked="@={viewModel.isAutoLogin()}"
+          android:checked="@={viewModel.checkedAutoLogin}"
           app:layout_constraintBottom_toTopOf="@id/tv_login"
           app:layout_constraintEnd_toStartOf="@id/tv_find_password"
           app:layout_constraintHorizontal_chainStyle="spread_inside"

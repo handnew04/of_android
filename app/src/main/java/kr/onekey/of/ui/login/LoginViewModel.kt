@@ -14,7 +14,7 @@ class LoginViewModel(private val loginRepository: LoginRepository, private val p
    val successLogin = MutableLiveData<Boolean>()
    val inputId = MutableLiveData<String>()
    val inputPassword = MutableLiveData<String>()
-   private val checkedAutoLogin = MutableLiveData<Boolean>()
+   val checkedAutoLogin = MutableLiveData<Boolean>()
 
    fun testtest() {
       launch {
