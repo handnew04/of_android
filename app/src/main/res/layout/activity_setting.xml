@@ -2,128 +2,128 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
+   <data>
 
-    </data>
+   </data>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical">
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:background="@color/white"
+       android:orientation="vertical">
 
-<!--        <include-->
-<!--            android:id="@+id/toolbar"-->
-<!--            layout="@layout/toolbar" />-->
+      <!--        <include-->
+      <!--            android:id="@+id/toolbar"-->
+      <!--            layout="@layout/toolbar" />-->
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:padding="@dimen/padding_side_wide"
-            tools:ignore="UselessParent">
+      <ScrollView
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:padding="@dimen/padding_side_wide"
+          tools:ignore="UselessParent">
 
-            <LinearLayout
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:gravity="center_horizontal"
+             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/profile"
+                android:textAppearance="@style/Font.Title.Headline" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="@dimen/margin_middle"
+                android:background="@drawable/shape_profile"
+                android:contentDescription="@string/image" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="@string/information"
+                android:textAppearance="@style/Font.Title.Headline" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:layout_marginTop="@dimen/margin_middle"
+                android:hint="@string/name">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/profile"
-                    android:textAppearance="@style/Font.Title.Headline" />
+               <com.google.android.material.textfield.TextInputEditText
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="얍" />
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="@dimen/margin_middle"
-                    android:background="@drawable/shape_profile"
-                    android:contentDescription="@string/image" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:text="@string/information"
-                    android:textAppearance="@style/Font.Title.Headline" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_middle"
-                    android:hint="@string/name">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="얍" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_middle"
-                    android:hint="@string/phone_number">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="010-1111-2222" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_middle"
-                    android:enabled="false"
-                    android:hint="@string/e_mail">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="email@mail.com" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-        </ScrollView>
-
-        <View
-            style="@style/Line"
-            android:layout_width="match_parent" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:orientation="horizontal"
-            android:paddingStart="@dimen/padding_side"
-            android:paddingTop="@dimen/padding_side_wide"
-            android:paddingEnd="@dimen/padding_side"
-            android:paddingBottom="@dimen/padding_side">
-
-
-            <TextView
-                style="@style/Button.Full.Gray"
-                android:layout_width="0dp"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
-                android:layout_weight="1"
-                android:text="@string/exit_without_change" />
+                android:layout_marginTop="@dimen/margin_middle"
+                android:hint="@string/phone_number">
 
-            <TextView
-                style="@style/Button.Full.Green"
-                android:layout_width="0dp"
+               <com.google.android.material.textfield.TextInputEditText
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="010-1111-2222" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/save_change" />
-        </LinearLayout>
-    </LinearLayout>
+                android:layout_marginTop="@dimen/margin_middle"
+                android:enabled="false"
+                android:hint="@string/e_mail">
+
+               <com.google.android.material.textfield.TextInputEditText
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="email@mail.com" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+         </LinearLayout>
+      </ScrollView>
+
+      <View
+          style="@style/Line"
+          android:layout_width="match_parent" />
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="bottom"
+          android:orientation="horizontal"
+          android:paddingStart="@dimen/padding_side"
+          android:paddingTop="@dimen/padding_side_wide"
+          android:paddingEnd="@dimen/padding_side"
+          android:paddingBottom="@dimen/padding_side">
+
+
+         <TextView
+             style="@style/Button.Full.Gray"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_marginEnd="12dp"
+             android:layout_weight="1"
+             android:text="@string/exit_without_change" />
+
+         <TextView
+             style="@style/Button.Full.Green"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:text="@string/save_change" />
+      </LinearLayout>
+   </LinearLayout>
 </layout>
