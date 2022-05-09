@@ -4,6 +4,9 @@
 
    <data>
 
+      <variable
+          name="userInfo"
+          type="kr.onekey.of.model.UserInfo" />
    </data>
 
    <LinearLayout
@@ -36,6 +39,8 @@
                 android:textAppearance="@style/Font.Title.Headline" />
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_profile"
+                profileImage="@{userInfo.profileImage}"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="@dimen/margin_middle"
@@ -59,7 +64,7 @@
                <com.google.android.material.textfield.TextInputEditText
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:text="얍" />
+                   android:text="@{userInfo.userName}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,7 +78,7 @@
                <com.google.android.material.textfield.TextInputEditText
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:text="010-1111-2222" />
+                   android:text="@{userInfo.userPhoneNumber}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,7 +93,7 @@
                <com.google.android.material.textfield.TextInputEditText
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:text="email@mail.com" />
+                   android:text="@{userInfo.userEmail}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -111,6 +116,7 @@
 
 
          <TextView
+             android:id="@+id/tv_cancel"
              style="@style/Button.Full.Gray"
              android:layout_width="0dp"
              android:layout_height="wrap_content"
@@ -119,6 +125,7 @@
              android:text="@string/exit_without_change" />
 
          <TextView
+             android:id="@+id/tv_save"
              style="@style/Button.Full.Green"
              android:layout_width="0dp"
              android:layout_height="wrap_content"
