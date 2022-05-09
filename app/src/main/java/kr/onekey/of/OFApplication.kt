@@ -3,6 +3,7 @@ package kr.onekey.of
 import android.app.Application
 import kr.onekey.of.di.networkModule
 import kr.onekey.of.di.repositoryModule
+import kr.onekey.of.di.utilModule
 import kr.onekey.of.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -16,7 +17,7 @@ class OFApplication : Application() {
       startKoin {
          androidLogger(Level.ERROR)
          androidContext(this@OFApplication)
-         modules(listOf(networkModule, repositoryModule, viewModelModule))
+         modules(listOf(networkModule, repositoryModule, viewModelModule, utilModule))
       }
    }
 }

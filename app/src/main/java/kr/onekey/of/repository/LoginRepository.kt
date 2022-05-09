@@ -6,4 +6,8 @@ import kr.onekey.of.network.api.UserApi
 
 class LoginRepository(private val userApi: UserApi) : BaseRepository() {
    suspend fun test() = ApiHandler().apiCall { userApi.getUser() }
+
+   suspend fun login(id: String, pw: String) {
+
+   }
 }

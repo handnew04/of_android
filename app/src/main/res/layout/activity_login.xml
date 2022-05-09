@@ -87,6 +87,7 @@
           android:id="@+id/tv_login"
           style="@style/Button.Full.Green"
           android:text="@string/login"
+          android:onClick="@{() -> viewModel.login()}"
           app:layout_constraintBottom_toTopOf="@id/tv_description"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
