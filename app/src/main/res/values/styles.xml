@@ -30,6 +30,7 @@
 
     <style name="Button.Stroke">
         <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">48dp</item>
         <item name="android:background">@drawable/shape_button_stroke</item>
     </style>
 

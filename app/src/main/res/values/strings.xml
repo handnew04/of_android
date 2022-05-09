@@ -15,4 +15,8 @@
     <string name="exit_without_change">Exit without Change</string>
     <string name="change_password">Change Password</string>
     <string name="please_check_your_e_mail_again">Please check your e-mail again</string>
+   <string name="close">close</string>
+   <string name="profile_picture">Profile Picture</string>
+   <string name="use_camera">Use Camera</string>
+   <string name="gallery">Gallery</string>
 </resources>

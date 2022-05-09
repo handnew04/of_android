@@ -6,6 +6,7 @@
     <dimen name="button_padding">10dp</dimen>
     <dimen name="padding_side">40dp</dimen>
     <dimen name="margin_middle">10dp</dimen>
+    <dimen name="margin_buttons">16dp</dimen>
     <dimen name="padding_side_wide">19dp</dimen>
     <dimen name="line_height">1dp</dimen>
     <dimen name="drawable_padding">10dp</dimen>
