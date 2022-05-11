@@ -1,6 +1,8 @@
 package kr.onekey.of
 
 import android.app.Application
+import android.util.Log
+import com.google.firebase.messaging.FirebaseMessaging
 import kr.onekey.of.di.networkModule
 import kr.onekey.of.di.repositoryModule
 import kr.onekey.of.di.utilModule
@@ -18,6 +20,17 @@ class OFApplication : Application() {
          androidLogger(Level.ERROR)
          androidContext(this@OFApplication)
          modules(listOf(networkModule, repositoryModule, viewModelModule, utilModule))
+      }
+   }
+
+   private fun getFCMToken() {
+      FirebaseMessaging.getInstance().token.addOnCompleteListener { task->
+         if (!task.isSuccessful) {
+            Log.w("Application", "Fetching FCM registration failed", task.exception)
+            return@addOnCompleteListener
+         }
+
+         val token = task.result
       }
    }
 }
