@@ -3,11 +3,13 @@ package kr.onekey.of.network
 import android.util.Log
 import kr.onekey.of.network.exception.ApiBaseException
 import kr.onekey.of.network.exception.ApiBaseException.Companion.EMPTY_BODY_EXCEPTION
+import kr.onekey.of.network.exception.EmptyBodyException
 import kr.onekey.of.network.exception.NetworkBaseException
 import kr.onekey.of.network.exception.NetworkBaseException.Companion.HTTP_EXCEPTION
 import kr.onekey.of.network.exception.NetworkBaseException.Companion.IO_EXCEPTION
 import kr.onekey.of.network.exception.NetworkBaseException.Companion.SOCKET_TIMEOUT_EXCEPTION
 import kr.onekey.of.network.exception.NetworkBaseException.Companion.UNKNOWN_EXCEPTION
+import kr.onekey.of.network.exception.NotFoundUserException
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.HttpException
@@ -24,7 +26,7 @@ class ApiHandler {
 
          return if (response.isSuccessful) {
             if (response.body() == null) {
-               ResultWrapper.Error(ApiBaseException(EMPTY_BODY_EXCEPTION))
+               ResultWrapper.Error(EmptyBodyException())
             } else {
                ResultWrapper.Success<T>(response.body()!!)
             }
@@ -32,8 +34,7 @@ class ApiHandler {
             val errorBody = response.errorBody()
             Log.e("ApiCall response is not successful", errorBody?.string() ?: "errorBody is null")
 
-            // TODO: 2022/05/03 ErrorCode 정해지면 수정 할 예정 -> mapApiException(code)
-            ResultWrapper.Error(ApiBaseException("temp error message"))
+            ResultWrapper.Error(mapApiException(response.code()))
          }
       } catch (t: Throwable) {
          Log.e("ApiCalls", "Call error : ${t.localizedMessage}", t.cause)
@@ -54,16 +55,16 @@ class ApiHandler {
       }
    }
 
-//   fun mapApiException(code: Int) : ApiBaseException {
-//      return when (code) {
-//         403 -> {
-//
-//         }
-//         else -> {
-//
-//         }
-//      }
-//   }
+   fun mapApiException(code: Int) : ApiBaseException {
+      return when (code) {
+         404 -> {
+            NotFoundUserException()
+         }
+         else -> {
+            ApiBaseException(UNKNOWN_EXCEPTION)
+         }
+      }
+   }
 
    fun mapNetworkThrowable(throwable: Throwable): NetworkBaseException {
       return when (throwable) {
