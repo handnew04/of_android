@@ -7,6 +7,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kr.onekey.of.base.BaseViewModel
 import kr.onekey.of.network.ResultWrapper
+import kr.onekey.of.network.exception.NotFoundUserException
 import kr.onekey.of.repository.LoginRepository
 import kr.onekey.of.util.PrefUtil
 
@@ -16,23 +17,6 @@ class LoginViewModel(private val loginRepository: LoginRepository, private val p
    val inputPassword = MutableLiveData<String>()
    val checkedAutoLogin = MutableLiveData<Boolean>()
 
-   fun testtest() {
-      launch {
-         val response = loginRepository.test()
-
-         withContext(Dispatchers.Main) {
-            when (response) {
-               is ResultWrapper.Success -> {
-                  Log.e(TAG, response.value.string())
-               }
-               is ResultWrapper.Error -> {
-                  Log.e(TAG, response.exception.message.toString())
-               }
-            }
-         }
-      }
-   }
-
    fun login() {
       if (isAutoLogin()) {
          prefUtil.apply {
@@ -41,19 +25,22 @@ class LoginViewModel(private val loginRepository: LoginRepository, private val p
          }
       }
 
-      // TODO: 2022/05/09 login api생기면 수정할 것
-      //val response = loginRepository.login(inputId, inputPassword)
+      launch {
+         val response = loginRepository.login(inputId.value!!, inputPassword.value!!)
 
-//      withContext(Dispatchers.Main) {
-//         when (response) {
-//            is ResultWrapper.Success -> {
-//
-//            }
-//            is ResultWrapper.Error -> {
-//               if (response.exception)
-//            }
-//         }
-//      }
+         withContext(Dispatchers.Main) {
+            when (response) {
+               is ResultWrapper.Success -> {
+                  successLogin.value = true
+               }
+               is ResultWrapper.Error -> {
+                  if (response.exception == NotFoundUserException()) {
+                     Log.e(TAG, response.exception.message!!)
+                  }
+               }
+            }
+         }
+      }
    }
 
    private fun isAutoLogin() = checkedAutoLogin.value!!
