@@ -22,7 +22,6 @@ abstract class BaseActivity<VDB : ViewDataBinding, VM : BaseViewModel>(
 
       binding = DataBindingUtil.setContentView<VDB>(this, layoutResId).apply {
          lifecycleOwner = this@BaseActivity
-         // TODO: 2022/05/03 _all -> viewModel로 변경해야함
          setVariable(BR.viewModel, viewModel)
       }
    }
