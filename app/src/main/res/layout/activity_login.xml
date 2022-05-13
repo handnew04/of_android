@@ -2,106 +2,111 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-   <data>
+    <data>
 
-      <variable
-          name="viewModel"
-          type="kr.onekey.of.ui.login.LoginViewModel" />
-   </data>
+        <variable
+            name="viewModel"
+            type="kr.onekey.of.ui.login.LoginViewModel" />
 
-   <androidx.constraintlayout.widget.ConstraintLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:background="@color/white"
-       android:padding="@dimen/padding_side">
+        <import type="android.view.View" />
+    </data>
 
-      <ImageView
-          android:id="@+id/iv_logo"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:contentDescription="@string/image"
-          android:src="@drawable/ic_login_logo"
-          app:layout_constraintBottom_toTopOf="@id/et_id"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          app:layout_constraintVertical_chainStyle="packed" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:padding="@dimen/padding_side">
 
-      <kr.onekey.of.ui.custom.EmailValidCheckEditText
-          android:id="@+id/et_id"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:drawableStart="@drawable/ic_mail"
-          android:drawablePadding="@dimen/drawable_padding"
-          android:hint="@string/please_enter_your_e_mail"
-          android:importantForAutofill="no"
-          android:inputType="textEmailAddress"
-          android:text="@={viewModel.inputId}"
-          app:layout_constraintBottom_toTopOf="@id/et_pw"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/iv_logo" />
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image"
+            android:src="@drawable/ic_login_logo"
+            app:layout_constraintBottom_toTopOf="@id/et_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-      <kr.onekey.of.ui.custom.PasswordEditText
-          android:id="@+id/et_pw"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:drawableStart="@drawable/ic_lock"
-          android:drawablePadding="@dimen/drawable_padding"
-          android:hint="@string/password"
-          android:importantForAutofill="no"
-          android:inputType="textPassword"
-          android:maxLines="1"
-          android:text="@={viewModel.inputPassword}"
-          app:layout_constraintBottom_toTopOf="@+id/cb_auto_login"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/et_id" />
+        <kr.onekey.of.ui.custom.EmailValidCheckEditText
+            android:id="@+id/et_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_mail"
+            android:drawablePadding="@dimen/drawable_padding"
+            android:hint="@string/please_enter_your_e_mail"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:text="@={viewModel.inputId}"
+            app:layout_constraintBottom_toTopOf="@id/et_pw"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_logo" />
 
-      <CheckBox
-          android:id="@+id/cb_auto_login"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/remember_me"
-          android:checked="@={viewModel.checkedAutoLogin}"
-          app:layout_constraintBottom_toTopOf="@id/tv_login"
-          app:layout_constraintEnd_toStartOf="@id/tv_find_password"
-          app:layout_constraintHorizontal_chainStyle="spread_inside"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/et_pw" />
+        <kr.onekey.of.ui.custom.PasswordEditText
+            android:id="@+id/et_pw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawablePadding="@dimen/drawable_padding"
+            android:hint="@string/password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:text="@={viewModel.inputPassword}"
+            app:layout_constraintBottom_toTopOf="@+id/cb_auto_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_id" />
 
-      <TextView
-          android:id="@+id/tv_find_password"
-          android:layout_width="wrap_content"
-          android:layout_height="0dp"
-          android:gravity="center"
-          android:text="@string/forgot_password"
-          android:textAppearance="@style/Font.Body.Body2"
-          android:textColor="@color/blue_500"
-          app:layout_constraintBottom_toBottomOf="@id/cb_auto_login"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toEndOf="@id/cb_auto_login"
-          app:layout_constraintTop_toTopOf="@id/cb_auto_login" />
+        <CheckBox
+            android:id="@+id/cb_auto_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="@={viewModel.checkedAutoLogin}"
+            android:text="@string/remember_me"
+            app:layout_constraintBottom_toTopOf="@id/tv_login"
+            app:layout_constraintEnd_toStartOf="@id/tv_find_password"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_pw" />
 
-      <TextView
-          android:id="@+id/tv_login"
-          style="@style/Button.Full.Green"
-          android:text="@string/login"
-          android:onClick="@{() -> viewModel.login()}"
-          app:layout_constraintBottom_toTopOf="@id/tv_description"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/cb_auto_login" />
+        <TextView
+            android:id="@+id/tv_find_password"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/forgot_password"
+            android:textAppearance="@style/Font.Body.Body2"
+            android:textColor="@color/blue_500"
+            app:layout_constraintBottom_toBottomOf="@id/cb_auto_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cb_auto_login"
+            app:layout_constraintTop_toTopOf="@id/cb_auto_login" />
 
-      <TextView
-          android:id="@+id/tv_description"
-          style="@style/WarningDescription"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/tv_login" />
+        <TextView
+            android:id="@+id/tv_login"
+            style="@style/Button.Full.Green"
+            android:layout_marginBottom="@dimen/margin_middle"
+            android:onClick="@{() -> viewModel.login()}"
+            android:text="@string/login"
+            app:layout_constraintBottom_toTopOf="@id/tv_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cb_auto_login" />
 
-   </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_description"
+            style="@style/WarningDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="아이디 또는 패스워드를 확인해주세요."
+            android:visibility="@{viewModel.isWarning() == true ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_login" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

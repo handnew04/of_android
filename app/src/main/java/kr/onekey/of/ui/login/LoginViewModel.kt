@@ -11,37 +11,52 @@ import kr.onekey.of.network.exception.NotFoundUserException
 import kr.onekey.of.repository.LoginRepository
 import kr.onekey.of.util.PrefUtil
 
-class LoginViewModel(private val loginRepository: LoginRepository, private val prefUtil: PrefUtil) : BaseViewModel() {
-   val successLogin = MutableLiveData<Boolean>()
-   val inputId = MutableLiveData<String>()
-   val inputPassword = MutableLiveData<String>()
-   val checkedAutoLogin = MutableLiveData<Boolean>()
+class LoginViewModel(private val loginRepository: LoginRepository, private val prefUtil: PrefUtil) :
+    BaseViewModel() {
+    val succeedLogin = MutableLiveData<Boolean>()
+    val isWarning = MutableLiveData<Boolean>()
+    var inputId = DEFAULT_VALUE
+    var inputPassword = DEFAULT_VALUE
+    var checkedAutoLogin = false
 
-   fun login() {
-      if (isAutoLogin()) {
-         prefUtil.apply {
-            saveId(inputId.value!!)
-            savePassword(inputPassword.value!!)
-         }
-      }
+    fun login() {
+        if (inputId.isBlank() || inputPassword.isBlank()) {
+            isWarning.value = true
+            return
+        }
 
-      launch {
-         val response = loginRepository.login(inputId.value!!, inputPassword.value!!)
+        isWarning.value = false
 
-         withContext(Dispatchers.Main) {
-            when (response) {
-               is ResultWrapper.Success -> {
-                  successLogin.value = true
-               }
-               is ResultWrapper.Error -> {
-                  if (response.exception == NotFoundUserException()) {
-                     Log.e(TAG, response.exception.message!!)
-                  }
-               }
+        if (checkedAutoLogin) {
+            prefUtil.savePassword(inputPassword)
+        } else {
+            prefUtil.initLogin()
+        }
+
+        prefUtil.saveId(inputId)
+
+
+        launch {
+            val response = loginRepository.login(inputId, inputPassword)
+
+            withContext(Dispatchers.Main) {
+                when (response) {
+                    is ResultWrapper.Success -> {
+                        succeedLogin.value = true
+                    }
+                    is ResultWrapper.Error -> {
+                        if (response.exception == NotFoundUserException()) {
+                            Log.e(TAG, response.exception.message!!)
+                        }
+
+                        succeedLogin.value = false
+                    }
+                }
             }
-         }
-      }
-   }
+        }
+    }
 
-   private fun isAutoLogin() = checkedAutoLogin.value!!
+    companion object {
+        const val DEFAULT_VALUE = ""
+    }
 }

@@ -28,4 +28,8 @@ class PrefUtil(context: Context) {
    }
 
    fun getPassword() = sharedPref.getString(USER_PASSWORD, DEFAULT_VALUE)
+
+   fun initLogin() {
+      getEdit().remove(USER_PASSWORD).apply()
+   }
 }

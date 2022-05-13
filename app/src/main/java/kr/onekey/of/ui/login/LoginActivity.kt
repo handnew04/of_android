@@ -1,10 +1,12 @@
 package kr.onekey.of.ui.login
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
+import android.view.View
 import kr.onekey.of.R
 import kr.onekey.of.base.BaseActivity
 import kr.onekey.of.databinding.ActivityLoginBinding
+import kr.onekey.of.ui.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(R.layout.activity_login) {
@@ -18,9 +20,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(R.layou
 
     private fun observe() {
         viewModel.apply {
-            successLogin.observe(this@LoginActivity) { successLogin ->
+            succeedLogin.observe(this@LoginActivity) { successLogin ->
                 if (successLogin) {
-                    Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    binding.tvDescription.visibility = View.VISIBLE
                 }
             }
         }
