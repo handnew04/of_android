@@ -8,7 +8,8 @@ class PrefUtil(context: Context) {
       const val DEFAULT_VALUE = ""
       const val PREF_DEFAULT = "PREF_DEFAULT"
       const val LOGIN_TOKEN = "LOGIN_TOKEN"
-      const val USER_ID = "USER_ID"
+      const val USER_ID = "USER_ID" //server user key
+      const val USER_EMAIL = "USER_EMAIL" //login id
       const val USER_PASSWORD = "USER_PASSWORD"
       const val USER_NAME = "USER_NAME"
       const val FCM_TOKEN = "FCM_TOKEN"
@@ -16,6 +17,12 @@ class PrefUtil(context: Context) {
 
    private val sharedPref = context.getSharedPreferences(PREF_DEFAULT, MODE_PRIVATE)
    private fun getEdit() = sharedPref.edit()
+
+   fun saveEmail(email: String) {
+      getEdit().putString(USER_EMAIL, email).apply()
+   }
+
+   fun getEmail() = sharedPref.getString(USER_EMAIL, DEFAULT_VALUE)
 
    fun saveId(userId: String) {
       getEdit().putString(USER_ID, userId).apply()

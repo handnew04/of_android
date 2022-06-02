@@ -2,9 +2,9 @@ package kr.onekey.of.network
 
 import android.util.Log
 import kr.onekey.of.network.exception.ApiBaseException
-import kr.onekey.of.network.exception.ApiBaseException.Companion.EMPTY_BODY_EXCEPTION
 import kr.onekey.of.network.exception.EmptyBodyException
 import kr.onekey.of.network.exception.NetworkBaseException
+import kr.onekey.of.network.exception.NetworkBaseException.Companion.CONNECT_EXCEPTION
 import kr.onekey.of.network.exception.NetworkBaseException.Companion.HTTP_EXCEPTION
 import kr.onekey.of.network.exception.NetworkBaseException.Companion.IO_EXCEPTION
 import kr.onekey.of.network.exception.NetworkBaseException.Companion.SOCKET_TIMEOUT_EXCEPTION
@@ -15,6 +15,7 @@ import org.json.JSONObject
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
+import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 class ApiHandler {
@@ -76,6 +77,9 @@ class ApiHandler {
          }
          is IOException -> {
             NetworkBaseException(IO_EXCEPTION)
+         }
+         is ConnectException -> {
+            NetworkBaseException(CONNECT_EXCEPTION)
          }
          else -> {
             NetworkBaseException(UNKNOWN_EXCEPTION)

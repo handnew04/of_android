@@ -9,9 +9,11 @@ object ViewBinding {
 
    @JvmStatic
    @BindingAdapter("profileImage")
-   fun bindProfileImage(view: CircleImageView, url: Url) {
-      Glide.with(view.context)
-         .load(url)
-         .into(view)
+   fun bindProfileImage(view: CircleImageView, url: Url?) {
+      url?.let {
+         Glide.with(view.context)
+            .load(url)
+            .into(view)
+      }
    }
 }

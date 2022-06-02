@@ -4,13 +4,15 @@ import com.google.gson.annotations.SerializedName
 import retrofit2.http.Url
 
 data class UserInfo(
+    @SerializedName("userId")
+    val id: String,
     @SerializedName("name")
-    val userName: String,
+    val name: String,
     @SerializedName("image")
     val profileImage: Url?,
     @SerializedName("phone")
-    val userPhoneNumber: String?,
+    val phoneNumber: String?,
     @SerializedName("email")
-    val userEmail: String
+    val email: String
 ) {
 }

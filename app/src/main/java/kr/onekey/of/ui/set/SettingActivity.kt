@@ -18,6 +18,7 @@ class SettingActivity :
       super.onCreate(savedInstanceState)
 
       setListeners()
+      viewModel.getUser()
    }
 
    private fun setListeners() {
@@ -29,7 +30,7 @@ class SettingActivity :
 
          }
          tvCancel.setOnClickListener {
-
+            finish()
          }
       }
    }

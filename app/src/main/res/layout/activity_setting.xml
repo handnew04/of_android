@@ -5,8 +5,8 @@
    <data>
 
       <variable
-          name="userInfo"
-          type="kr.onekey.of.model.UserInfo" />
+          name="viewModel"
+          type="kr.onekey.of.ui.set.SettingViewModel" />
    </data>
 
    <LinearLayout
@@ -40,7 +40,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_profile"
-                profileImage="@{userInfo.profileImage}"
+                profileImage="@{viewModel.userInfo.profileImage}"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="@dimen/margin_middle"
@@ -64,7 +64,7 @@
                <com.google.android.material.textfield.TextInputEditText
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:text="@{userInfo.userName}" />
+                   android:text="@{viewModel.userInfo.name}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,7 +78,7 @@
                <com.google.android.material.textfield.TextInputEditText
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:text="@{userInfo.userPhoneNumber}" />
+                   android:text="@{viewModel.userInfo.phoneNumber}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -93,7 +93,7 @@
                <com.google.android.material.textfield.TextInputEditText
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:text="@{userInfo.userEmail}" />
+                   android:text="@{viewModel.userInfo.email}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -128,7 +128,7 @@
              android:id="@+id/tv_save"
              style="@style/Button.Full.Green"
              android:layout_width="0dp"
-             android:layout_height="wrap_content"
+             android:layout_height="match_parent"
              android:layout_weight="1"
              android:text="@string/save_change" />
       </LinearLayout>

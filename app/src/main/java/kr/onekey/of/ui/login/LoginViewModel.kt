@@ -33,7 +33,7 @@ class LoginViewModel(private val loginRepository: LoginRepository, private val p
             prefUtil.initLogin()
         }
 
-        prefUtil.saveId(inputId)
+        prefUtil.saveEmail(inputId)
 
 
         launch {
@@ -43,6 +43,7 @@ class LoginViewModel(private val loginRepository: LoginRepository, private val p
                 when (response) {
                     is ResultWrapper.Success -> {
                         succeedLogin.value = true
+                        prefUtil.saveId(response.value.id)
                     }
                     is ResultWrapper.Error -> {
                         if (response.exception == NotFoundUserException()) {
