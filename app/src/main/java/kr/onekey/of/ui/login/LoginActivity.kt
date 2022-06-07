@@ -7,6 +7,7 @@ import kr.onekey.of.R
 import kr.onekey.of.base.BaseActivity
 import kr.onekey.of.databinding.ActivityLoginBinding
 import kr.onekey.of.ui.main.MainActivity
+import kr.onekey.of.ui.set.SettingActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(R.layout.activity_login) {
@@ -22,7 +23,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(R.layou
         viewModel.apply {
             succeedLogin.observe(this@LoginActivity) { successLogin ->
                 if (successLogin) {
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    val intent = Intent(this@LoginActivity, SettingActivity::class.java)
                     startActivity(intent)
                     finish()
                 } else {

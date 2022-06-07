@@ -8,6 +8,7 @@
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
+       android:background="@drawable/shape_dialog"
        android:orientation="vertical">
 
       <LinearLayout
@@ -47,7 +48,7 @@
           android:id="@+id/tv_back"
           android:layout_width="match_parent"
           android:layout_height="56dp"
-          android:background="@color/gray_200"
+          android:background="@drawable/shape_dialog_close"
           android:gravity="center"
           android:text="@string/close"
           android:textAppearance="@style/Font.Body.Body2" />
