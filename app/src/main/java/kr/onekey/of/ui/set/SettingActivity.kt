@@ -1,21 +1,37 @@
 package kr.onekey.of.ui.set
 
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import kr.onekey.of.R
 import kr.onekey.of.base.BaseActivity
 import kr.onekey.of.databinding.ActivitySettingBinding
 import kr.onekey.of.databinding.DialogChoiceBinding
 import kr.onekey.of.ui.PictureDialog
+import kr.onekey.of.util.PermissionUtil
+import kr.onekey.of.util.PictureUtil
+import kr.onekey.of.util.PictureUtil.PERMISSION_REQUEST_CODE_CAMERA
+import kr.onekey.of.util.PictureUtil.PERMISSION_REQUEST_CODE_GALLERY
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingActivity :
    BaseActivity<ActivitySettingBinding, SettingViewModel>(R.layout.activity_setting) {
    override val viewModel: SettingViewModel by viewModel()
+   private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
+
+      resultLauncher = initResultLauncher()
 
       setListeners()
       viewModel.getUser()
@@ -55,10 +71,90 @@ class SettingActivity :
    }
 
    private fun takePicture() {
+      checkPermissions(PERMISSION_REQUEST_CODE_CAMERA) {
 
+      }
    }
 
    private fun getPicture() {
+      checkPermissions(PERMISSION_REQUEST_CODE_GALLERY) {
+         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+         resultLauncher.launch(intent)
+      }
+   }
 
+   private fun checkPermissions(requestCode: Int, doFunc: () -> Unit) {
+      when (requestCode) {
+         PERMISSION_REQUEST_CODE_GALLERY -> {
+            if (PermissionUtil.hasPermissions(this, PictureUtil.getGalleryPermissions())) {
+               doFunc()
+            } else {
+               PictureUtil.requestPermissionsForGallery(this)
+            }
+         }
+         PERMISSION_REQUEST_CODE_CAMERA -> {
+            if (PermissionUtil.hasPermissions(this, PictureUtil.getCameraPermissions())) {
+               doFunc()
+            } else {
+               PictureUtil.requestPermissionForCamera(this)
+            }
+         }
+         else -> {
+
+         }
+      }
+   }
+
+   private fun initResultLauncher() =
+      registerForActivityResult(
+         ActivityResultContracts.StartActivityForResult()
+      ) { result ->
+         if (result.resultCode == RESULT_OK) {
+            result.data?.data?.let { imageUri ->
+               val filePath = getFilePath(imageUri)
+               Log.e("Photo ", "photo uri : $imageUri")
+               viewModel.uploadPicture(filePath!!)
+            }
+         } else {
+
+         }
+      }
+
+   private fun getFilePath(uri: Uri): String? {
+      val cursor = contentResolver.query(uri, null, null, null, null)
+      var path: String? = null
+      cursor?.let {
+         cursor.moveToNext()
+         path = cursor.getString(cursor.getColumnIndexOrThrow("_data"))
+         cursor.close()
+      }
+      return path
+   }
+
+   override fun onRequestPermissionsResult(
+      requestCode: Int,
+      permissions: Array<out String>,
+      grantResults: IntArray
+   ) {
+
+      if (grantResults.any { result -> result == PackageManager.PERMISSION_DENIED }) {
+         Toast.makeText(this@SettingActivity, "권한을 허용해주세요.", Toast.LENGTH_SHORT).show()
+         //showDetailSettings()
+         return
+      }
+
+      if (requestCode == PERMISSION_REQUEST_CODE_GALLERY) {
+         getPicture()
+      } else if (requestCode == PERMISSION_REQUEST_CODE_CAMERA) {
+         takePicture()
+      }
+      super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+   }
+
+   private fun showDetailSettings() {
+      val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+      val uri = Uri.fromParts("package", packageName, null)
+      intent.data = uri
+      startActivity(intent)
    }
 }
