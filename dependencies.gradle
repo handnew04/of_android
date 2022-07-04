@@ -24,7 +24,7 @@ ext.versions = [
         okHttp              : '4.9.1',
 
         //firebase
-        googleService       : '4.3.10',
+        googleService       : '4.3.13',
         firebaseBom         : '29.3.1',
 
         //circle imageView

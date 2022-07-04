@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -16,7 +17,6 @@ import kr.onekey.of.ui.main.MainActivity
 class DefaultFirebaseMessagingService : FirebaseMessagingService(){
    override fun onMessageReceived(message: RemoteMessage) {
       super.onMessageReceived(message)
-
       val messageBody = message.data["body"]
       if (!messageBody.isNullOrBlank()) {
          sendNotification(messageBody)
@@ -55,5 +55,9 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService(){
       }
 
       notificationManager.notify(0 /* ID of notification */, notificationBuilder.build())
+   }
+
+   companion object {
+      const val TAG = "FirebaseMessagingService"
    }
 }

@@ -47,7 +47,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
    }
 
    class WebAppInterface(private val context: Context) {
-
       @JavascriptInterface
       fun showSettingActivity() {
          val intent = Intent(context, SettingActivity::class.java)

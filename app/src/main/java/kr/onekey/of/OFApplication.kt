@@ -2,6 +2,8 @@ package kr.onekey.of
 
 import android.app.Application
 import android.util.Log
+import com.google.firebase.FirebaseApp
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.messaging.FirebaseMessaging
 import kr.onekey.of.di.networkModule
 import kr.onekey.of.di.repositoryModule
@@ -21,6 +23,8 @@ class OFApplication : Application() {
          androidContext(this@OFApplication)
          modules(listOf(networkModule, repositoryModule, viewModelModule, utilModule))
       }
+
+      getFCMToken()
    }
 
    private fun getFCMToken() {
@@ -31,6 +35,8 @@ class OFApplication : Application() {
          }
 
          val token = task.result
+
+         Log.e("Token", token)
       }
    }
 }

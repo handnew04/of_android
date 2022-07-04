@@ -2,7 +2,9 @@ package kr.onekey.of.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import com.google.firebase.messaging.FirebaseMessaging
 import kr.onekey.of.R
 import kr.onekey.of.base.BaseActivity
 import kr.onekey.of.databinding.ActivityLoginBinding
@@ -23,7 +25,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(R.layou
         viewModel.apply {
             succeedLogin.observe(this@LoginActivity) { successLogin ->
                 if (successLogin) {
-                    val intent = Intent(this@LoginActivity, SettingActivity::class.java)
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
                     finish()
                 } else {

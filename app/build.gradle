@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
 apply from: "$rootDir/dependencies.gradle"
 
 android {
@@ -15,7 +16,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "WEB_URL", '"https://naver.com"')
+        buildConfigField("String", "WEB_URL", '"http://192.168.0.35:3500"')
     }
 
     buildTypes {
