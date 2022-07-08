@@ -11,7 +11,7 @@ import kr.onekey.of.network.exception.NotFoundUserException
 import kr.onekey.of.repository.LoginRepository
 import kr.onekey.of.util.PrefUtil
 
-class LoginViewModel(private val loginRepository: LoginRepository, private val prefUtil: PrefUtil) :
+class LoginViewModel(private val loginRepository: LoginRepository) :
     BaseViewModel() {
     val succeedLogin = MutableLiveData<Boolean>()
     val isWarning = MutableLiveData<Boolean>()
@@ -28,12 +28,12 @@ class LoginViewModel(private val loginRepository: LoginRepository, private val p
         isWarning.value = false
 
         if (checkedAutoLogin) {
-            prefUtil.savePassword(inputPassword)
+            loginRepository.savePassword(inputPassword)
         } else {
-            prefUtil.initLogin()
+            loginRepository.initLogin()
         }
 
-        prefUtil.saveEmail(inputId)
+        loginRepository.saveEmail(inputId)
 
 
         launch {
@@ -43,7 +43,7 @@ class LoginViewModel(private val loginRepository: LoginRepository, private val p
                 when (response) {
                     is ResultWrapper.Success -> {
                         succeedLogin.value = true
-                        prefUtil.saveId(response.value.id)
+                        loginRepository.saveId(response.value.id)
                     }
                     is ResultWrapper.Error -> {
                         if (response.exception == NotFoundUserException()) {
