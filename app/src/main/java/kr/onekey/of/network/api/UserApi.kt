@@ -7,5 +7,5 @@ import retrofit2.http.Path
 
 interface UserApi {
    @GET("user/{id}")
-   suspend fun getUser(@Path("id") userId: String) : Response<UserInfo>
+   suspend fun getUser(@Path("id") userId: Int) : Response<UserInfo>
 }

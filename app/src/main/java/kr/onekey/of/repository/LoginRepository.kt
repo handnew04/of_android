@@ -8,6 +8,7 @@ import kr.onekey.of.util.PrefUtil
 class LoginRepository(private val loginApi: LoginApi, private val prefUtil: PrefUtil) :
    BaseRepository() {
    suspend fun login(id: String, pw: String) = ApiHandler().apiCall { loginApi.login(id, pw) }
+
    fun savePassword(password: String) {
       prefUtil.savePassword(password)
    }
@@ -20,7 +21,11 @@ class LoginRepository(private val loginApi: LoginApi, private val prefUtil: Pref
       prefUtil.saveEmail(email)
    }
 
-   fun saveId(id: String) {
+   fun saveId(id: Int) {
       prefUtil.saveId(id)
+   }
+
+   fun saveTokens(accessToken: String, refreshToken: String) {
+      prefUtil.saveLoginTokens(accessToken, refreshToken)
    }
 }

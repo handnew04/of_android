@@ -9,55 +9,57 @@ import kr.onekey.of.base.BaseViewModel
 import kr.onekey.of.network.ResultWrapper
 import kr.onekey.of.network.exception.NotFoundUserException
 import kr.onekey.of.repository.LoginRepository
-import kr.onekey.of.util.PrefUtil
 
 class LoginViewModel(private val loginRepository: LoginRepository) :
-    BaseViewModel() {
-    val succeedLogin = MutableLiveData<Boolean>()
-    val isWarning = MutableLiveData<Boolean>()
-    var inputId = DEFAULT_VALUE
-    var inputPassword = DEFAULT_VALUE
-    var checkedAutoLogin = false
+   BaseViewModel() {
+   val succeedLogin = MutableLiveData<Boolean>()
+   val isWarning = MutableLiveData<Boolean>()
+   var inputId = DEFAULT_VALUE
+   var inputPassword = DEFAULT_VALUE
+   var checkedAutoLogin = false
 
-    fun login() {
-        if (inputId.isBlank() || inputPassword.isBlank()) {
-            isWarning.value = true
-            return
-        }
+   fun login() {
+      if (inputId.isBlank() || inputPassword.isBlank()) {
+         isWarning.value = true
+         return
+      }
 
-        isWarning.value = false
+      isWarning.value = false
 
-        if (checkedAutoLogin) {
-            loginRepository.savePassword(inputPassword)
-        } else {
-            loginRepository.initLogin()
-        }
+      if (checkedAutoLogin) {
+         loginRepository.savePassword(inputPassword)
+      } else {
+         loginRepository.initLogin()
+      }
 
-        loginRepository.saveEmail(inputId)
+      loginRepository.saveEmail(inputId)
 
 
-        launch {
-            val response = loginRepository.login(inputId, inputPassword)
+      launch {
+         val response = loginRepository.login(inputId, inputPassword)
 
-            withContext(Dispatchers.Main) {
-                when (response) {
-                    is ResultWrapper.Success -> {
-                        succeedLogin.value = true
-                        loginRepository.saveId(response.value.id)
-                    }
-                    is ResultWrapper.Error -> {
-                        if (response.exception == NotFoundUserException()) {
-                            Log.e(TAG, response.exception.message!!)
-                        }
+         withContext(Dispatchers.Main) {
+            when (response) {
+               is ResultWrapper.Success -> {
+                  succeedLogin.value = true
+                  loginRepository.apply {
+                     saveId(response.value.userId)
+                     saveTokens(response.value.accessToken, response.value.refreshToken)
+                  }
+               }
+               is ResultWrapper.Error -> {
+                  if (response.exception == NotFoundUserException()) {
+                     Log.e(TAG, response.exception.message!!)
+                  }
 
-                        succeedLogin.value = false
-                    }
-                }
+                  succeedLogin.value = false
+               }
             }
-        }
-    }
+         }
+      }
+   }
 
-    companion object {
-        const val DEFAULT_VALUE = ""
-    }
+   companion object {
+      const val DEFAULT_VALUE = ""
+   }
 }

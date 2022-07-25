@@ -17,5 +17,5 @@ class UserRepository(private val userApi: UserApi) : BaseRepository() {
 
    }
 
-   suspend fun getUserInfo(userId: String) = ApiHandler().apiCall { userApi.getUser(userId) }
+   suspend fun getUserInfo(userId: Int) = ApiHandler().apiCall { userApi.getUser(userId) }
 }

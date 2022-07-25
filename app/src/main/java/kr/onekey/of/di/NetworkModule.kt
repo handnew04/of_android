@@ -4,6 +4,7 @@ import kr.onekey.of.BuildConfig
 import kr.onekey.of.BuildConfig.BASE_URL
 import kr.onekey.of.network.api.LoginApi
 import kr.onekey.of.network.api.UserApi
+import kr.onekey.of.network.interceptor.AuthenticationInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.scope.Scope
@@ -32,6 +33,7 @@ private fun initOkHttpClient() = OkHttpClient.Builder()
    .connectTimeout(TIME_OUT, TimeUnit.MILLISECONDS)
    .readTimeout(TIME_OUT, TimeUnit.MILLISECONDS)
    .writeTimeout(TIME_OUT, TimeUnit.MILLISECONDS)
+   .addInterceptor(AuthenticationInterceptor())
    .addInterceptor(HttpLoggingInterceptor().apply {
       level = if (BuildConfig.DEBUG) {
          HttpLoggingInterceptor.Level.BODY

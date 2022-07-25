@@ -17,6 +17,7 @@ import kr.onekey.of.ui.main.MainActivity
 class DefaultFirebaseMessagingService : FirebaseMessagingService(){
    override fun onMessageReceived(message: RemoteMessage) {
       super.onMessageReceived(message)
+      Log.e(TAG, message.data.toString())
       val messageBody = message.data["body"]
       if (!messageBody.isNullOrBlank()) {
          sendNotification(messageBody)
