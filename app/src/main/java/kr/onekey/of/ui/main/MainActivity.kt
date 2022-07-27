@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.webkit.JavascriptInterface
+import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import kr.onekey.of.BuildConfig
@@ -31,14 +33,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
    private fun initWebView() {
       webView.apply {
          settings.javaScriptEnabled = true
-         addJavascriptInterface(WebAppInterface(this@MainActivity), "Android")
-         webViewClient = WebViewClient()
-         loadUrl(BuildConfig.WEB_URL)
+         addJavascriptInterface(WebAppInterface(this@MainActivity, viewModel), "Android")
+         webChromeClient = WebChromeClient()
+         loadUrl(BuildConfig.WEB_URL, viewModel.getToken())
       }
    }
 
    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-      if(keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
+      if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
          webView.goBack()
          return true
       }
@@ -46,11 +48,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
       return super.onKeyDown(keyCode, event)
    }
 
-   class WebAppInterface(private val context: Context) {
+   class WebAppInterface(private val context: Context, private val viewModel: MainViewModel) {
       @JavascriptInterface
       fun showSettingActivity() {
          val intent = Intent(context, SettingActivity::class.java)
          context.startActivity(intent)
+      }
+
+      fun updateTokens(accessToken: String, refreshToken: String) {
+         Log.e("updateToken", "a : $accessToken, r : $refreshToken")
+         viewModel.updateTokens(accessToken, refreshToken)
       }
    }
 

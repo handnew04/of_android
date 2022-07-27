@@ -63,5 +63,5 @@ class PrefUtil(context: Context) {
 
    fun getAccessToken() = sharedPref.getString(ACCESS_TOKEN, DEFAULT_VALUE)
 
-   private fun getRefreshToken() = sharedPref.getString(REFRESH_TOKEN, DEFAULT_VALUE)
+   fun getRefreshToken() = sharedPref.getString(REFRESH_TOKEN, DEFAULT_VALUE)
 }

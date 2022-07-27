@@ -16,7 +16,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "WEB_URL", '"http://192.168.0.35:3500"')
+        buildConfigField("String", "WEB_URL", '"http://192.168.0.35:4100"')
     }
 
     buildTypes {
