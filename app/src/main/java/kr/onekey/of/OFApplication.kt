@@ -24,7 +24,7 @@ class OFApplication : Application() {
          modules(listOf(networkModule, repositoryModule, viewModelModule, utilModule))
       }
 
-      getFCMToken()
+      //getFCMToken()
    }
 
    private fun getFCMToken() {

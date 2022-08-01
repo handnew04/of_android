@@ -22,12 +22,12 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
-            buildConfigField("String", "BASE_URL", '"http://13.124.238.231:3000/api/"')
+            buildConfigField("String", "BASE_URL", '"http://192.168.0.136:3000/api/"')
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "BASE_URL", '"https://naver.com"')
+            buildConfigField("String", "BASE_URL", '"http://13.124.238.231:3000/api/"')
         }
     }
     compileOptions {
