@@ -1,7 +1,9 @@
 package kr.onekey.of.ui.set
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kr.onekey.of.base.BaseViewModel
@@ -20,7 +22,7 @@ class SettingViewModel(private val prefUtil: PrefUtil, private val userRepositor
    val userInfo = MutableLiveData<UserInfo>()
 
    fun getUser() {
-      launch {
+       launch {
          val userId = prefUtil.getId()
 
          userId?.let {
@@ -50,7 +52,7 @@ class SettingViewModel(private val prefUtil: PrefUtil, private val userRepositor
       }
    }
 
-   private fun convertToMultiPartBody(inputString: InputStream) : MultipartBody.Part {
+   private fun convertToMultiPartBody(inputString: InputStream): MultipartBody.Part {
       val request = inputString.readBytes().toRequestBody("image/*".toMediaType())
       val userId = prefUtil.getId()
 

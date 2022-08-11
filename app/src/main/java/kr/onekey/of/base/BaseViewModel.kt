@@ -1,15 +1,18 @@
 package kr.onekey.of.base
 
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-abstract class BaseViewModel : ViewModel(), CoroutineScope {
+abstract class BaseViewModel : ViewModel() {
    private var job: Job = Job()
    protected val TAG = javaClass.name
 
-   override val coroutineContext: CoroutineContext
+   private val coroutineContext: CoroutineContext
       get() = Dispatchers.IO + job
+
+   fun launch(block: suspend CoroutineScope.() -> Unit) = viewModelScope.launch(coroutineContext) {
+      block()
+   }
 }
