@@ -16,13 +16,16 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "WEB_URL", '"http://192.168.0.35:4100"')
+        buildConfigField("String", "WEB_URL", '"http://192.168.123.107:4100"')
     }
 
     buildTypes {
         debug {
             minifyEnabled false
-            buildConfigField("String", "BASE_URL", '"http://192.168.0.136:3000/api/"')
+            //local
+            //buildConfigField("String", "BASE_URL", '"http://192.168.0.136:3000/api/"')
+            //remote
+            buildConfigField("String", "BASE_URL", '"http://13.124.238.231:3000/api/"')
         }
         release {
             minifyEnabled true
@@ -50,6 +53,8 @@ dependencies {
     implementation "com.google.android.material:material:$versions.material"
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
     implementation "androidx.core:core-splashscreen:$versions.splash"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.androidX"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$versions.androidX"
 
     //gson
     implementation "com.google.code.gson:gson:$versions.gson"
