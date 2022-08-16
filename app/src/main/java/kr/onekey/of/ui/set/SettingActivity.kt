@@ -34,7 +34,19 @@ class SettingActivity :
       resultLauncher = initResultLauncher()
 
       setListeners()
+      observe()
       viewModel.getUser()
+   }
+
+   private fun observe() {
+      viewModel.isCompletedUpdatingUserInfo.observe(this) { isCompleted ->
+         if (isCompleted) {
+            Toast.makeText(this@SettingActivity, "회원님의 정보가 변경되었습니다.", Toast.LENGTH_SHORT).show()
+            finish()
+         } else {
+            Toast.makeText(this@SettingActivity, "잠시 후 다시 시도해 주세요.", Toast.LENGTH_SHORT).show()
+         }
+      }
    }
 
    private fun setListeners() {

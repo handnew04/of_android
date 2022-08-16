@@ -64,7 +64,8 @@
                <com.google.android.material.textfield.TextInputEditText
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:text="@{viewModel.userInfo.name}" />
+                   android:inputType="textPersonName"
+                   android:text="@={viewModel.userName}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,7 +79,8 @@
                <com.google.android.material.textfield.TextInputEditText
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:text="@{viewModel.userInfo.phoneNumber}" />
+                   android:inputType="phone"
+                   android:text="@={viewModel.userPhoneNumber}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -130,6 +132,7 @@
              android:layout_width="0dp"
              android:layout_height="match_parent"
              android:layout_weight="1"
+             android:onClick="@{() -> viewModel.updateUser()}"
              android:text="@string/save_change" />
       </LinearLayout>
    </LinearLayout>
