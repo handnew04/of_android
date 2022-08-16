@@ -1,40 +1,70 @@
 package kr.onekey.of.network.interceptor
 
-import kr.onekey.of.di.DI_PREF_UTIL
-import kr.onekey.of.util.PrefUtil
+import android.content.Context
+import android.util.Log
+import kr.onekey.of.OFApplication
+import kr.onekey.of.network.exception.ApiBaseException.Companion.INVALID_TOKEN_EXCEPTION_CODE
+import kr.onekey.of.network.exception.InvalidTokenException
+import kr.onekey.of.repository.AuthRepository
 import okhttp3.Interceptor
+import okhttp3.Request
 import okhttp3.Response
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import org.koin.core.qualifier.named
 
-class AuthenticationInterceptor : Interceptor, KoinComponent {
-   private val prefUtil: PrefUtil by inject(named(DI_PREF_UTIL))
+class AuthenticationInterceptor(private val context: Context) : Interceptor, KoinComponent {
+   private val authRepository: AuthRepository by inject()
 
    override fun intercept(chain: Interceptor.Chain): Response {
       val api = chain.request().url.toString().split("api/")[1]
+      val accessToken = authRepository.getAccessToken()
+
       return if (api != LOGIN_API) {
-         getRequestWithAuthorizationToken(chain)
+         val newRequest = chain.request().appendToken(accessToken)
+         val response = chain.proceed(newRequest)
+
+         if (response.isTokenInvalid()) {
+            if (api == REQUEST_NEW_TOKEN) {
+               (context as OFApplication).showLoginActivity()
+               response.close()
+               return response
+            }
+
+            val refreshResponse = authRepository.requestAccessToken()
+
+            val newAccessToken = refreshResponse.accessToken
+            val newRefreshToken = refreshResponse.refreshToken
+
+            if (newAccessToken != null && newRefreshToken != null) {
+               authRepository.saveTokens(newAccessToken, newRefreshToken)
+               val refreshRequest = chain.request().appendToken(newAccessToken)
+               return chain.proceed(refreshRequest)
+            }
+         }
+
+         return response
       } else {
          chain.proceed(chain.request())
       }
    }
 
-   private fun getRequestWithAuthorizationToken(chain: Interceptor.Chain): Response {
-      val token = prefUtil.getAccessToken()
-
-      val request = chain.request().newBuilder()
+   private fun Request.appendToken(token: String): Request {
+      return this.newBuilder()
          .addHeader(
-            "Authorization",
+            AUTHORIZATION,
             "Bearer $token"
          )
          .build()
+   }
 
-      return chain.proceed(request)
+   private fun Response.isTokenInvalid(): Boolean {
+      return this.code == INVALID_TOKEN_EXCEPTION_CODE
    }
 
    companion object {
       const val LOGIN_API = "auth/login"
+      const val REQUEST_NEW_TOKEN = "auth/refresh"
+      const val AUTHORIZATION = "Authorization"
       const val TAG = "AuthenticationInterceptor"
    }
 }

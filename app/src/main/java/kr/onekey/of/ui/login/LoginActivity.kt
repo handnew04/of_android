@@ -11,9 +11,13 @@ import kr.onekey.of.databinding.ActivityLoginBinding
 import kr.onekey.of.ui.main.MainActivity
 import kr.onekey.of.ui.set.SettingActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.system.exitProcess
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(R.layout.activity_login) {
     override val viewModel: LoginViewModel by viewModel()
+    private val isInvalidTokenLogin: Boolean by lazy {
+        intent.getBooleanExtra(INVALID_TOKEN_LOGIN, false)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,5 +38,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(R.layou
             }
         }
     }
+    companion object {
+        const val INVALID_TOKEN_LOGIN = "INVALID_TOKEN_LOGIN"
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        if (isInvalidTokenLogin) {
+            finishAffinity()
+        }
+    }
 }

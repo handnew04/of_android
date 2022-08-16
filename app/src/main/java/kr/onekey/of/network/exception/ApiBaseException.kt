@@ -12,5 +12,8 @@ open class ApiBaseException(message: String?) : Exception(message) {
       const val NOT_FOUND_USER_EXCEPTION = "not found user"
       const val EMPTY_BODY_EXCEPTION = "empty body"
       const val UNKNOWN_EXCEPTION = "unknown exception"
+
+      const val INVALID_TOKEN_EXCEPTION_CODE = 401
+      const val NOT_FOUND_USER_EXCEPTION_CODE = 404
    }
 }

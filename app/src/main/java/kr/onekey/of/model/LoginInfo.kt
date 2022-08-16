@@ -2,13 +2,12 @@ package kr.onekey.of.model
 
 import com.google.gson.annotations.SerializedName
 
-data class TokenInfo(
-   val code: Int?,
+data class LoginInfo(
    @SerializedName("userId")
-   val userId: Int?,
+   val userId: Int,
    @SerializedName("accessToken")
-   val accessToken: String?,
+   val accessToken: String,
    @SerializedName("refreshToken")
-   val refreshToken: String?
+   val refreshToken: String
 ) {
 }

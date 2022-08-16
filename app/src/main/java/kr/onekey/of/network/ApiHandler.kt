@@ -1,15 +1,14 @@
 package kr.onekey.of.network
 
 import android.util.Log
-import kr.onekey.of.network.exception.ApiBaseException
-import kr.onekey.of.network.exception.EmptyBodyException
-import kr.onekey.of.network.exception.NetworkBaseException
+import kr.onekey.of.network.exception.*
+import kr.onekey.of.network.exception.ApiBaseException.Companion.INVALID_TOKEN_EXCEPTION_CODE
+import kr.onekey.of.network.exception.ApiBaseException.Companion.NOT_FOUND_USER_EXCEPTION_CODE
 import kr.onekey.of.network.exception.NetworkBaseException.Companion.CONNECT_EXCEPTION
 import kr.onekey.of.network.exception.NetworkBaseException.Companion.HTTP_EXCEPTION
 import kr.onekey.of.network.exception.NetworkBaseException.Companion.IO_EXCEPTION
 import kr.onekey.of.network.exception.NetworkBaseException.Companion.SOCKET_TIMEOUT_EXCEPTION
 import kr.onekey.of.network.exception.NetworkBaseException.Companion.UNKNOWN_EXCEPTION
-import kr.onekey.of.network.exception.NotFoundUserException
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.HttpException
@@ -27,8 +26,10 @@ class ApiHandler {
 
          return if (response.isSuccessful) {
             if (response.body() == null) {
+               Log.e("ApiCall", "response body is empty")
                ResultWrapper.Error(EmptyBodyException())
             } else {
+               Log.e("ApiCall", "successful notEmpty")
                ResultWrapper.Success<T>(response.body()!!)
             }
          } else {
@@ -58,8 +59,11 @@ class ApiHandler {
 
    fun mapApiException(code: Int) : ApiBaseException {
       return when (code) {
-         404 -> {
+         NOT_FOUND_USER_EXCEPTION_CODE -> {
             NotFoundUserException()
+         }
+         INVALID_TOKEN_EXCEPTION_CODE -> {
+            InvalidTokenException()
          }
          else -> {
             ApiBaseException(UNKNOWN_EXCEPTION)
@@ -90,5 +94,6 @@ class ApiHandler {
    companion object {
       private const val MESSAGE_KEY = "message"
       private const val ERROR_KEY = "error"
+      const val SUCCESS_CODE = 200
    }
 }

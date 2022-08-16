@@ -2,6 +2,7 @@ package kr.onekey.of.util
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import android.util.Log
 
 class PrefUtil(context: Context) {
    companion object {
@@ -50,18 +51,13 @@ class PrefUtil(context: Context) {
    }
 
    fun saveAccessToken(accessToken: String) {
-      getEdit().putString(ACCESS_TOKEN, DEFAULT_VALUE).apply()
+      getEdit().putString(ACCESS_TOKEN, accessToken).apply()
    }
 
-   fun changeRefreshTokenToAccessToken(): Boolean {
-      getRefreshToken()?.let { refreshToken ->
-         saveAccessToken(refreshToken)
-         return true
-      }
-      return false
+   fun changeRefreshTokenToAccessToken() {
+      saveAccessToken(getRefreshToken())
    }
 
-   fun getAccessToken() = sharedPref.getString(ACCESS_TOKEN, DEFAULT_VALUE)
-
-   fun getRefreshToken() = sharedPref.getString(REFRESH_TOKEN, DEFAULT_VALUE)
+   fun getAccessToken() = sharedPref.getString(ACCESS_TOKEN, DEFAULT_VALUE) ?: "Token is null"
+   fun getRefreshToken() = sharedPref.getString(REFRESH_TOKEN, DEFAULT_VALUE) ?: "Token is null"
 }

@@ -1,5 +1,5 @@
 <resources>
-   <string name="app_name">OF</string>
+   <string name="app_name">올레팜</string>
    <string name="image">image</string>
    <string name="login">Login</string>
    <string name="forgot_password">Forgot Password?</string>
