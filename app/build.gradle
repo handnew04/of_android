@@ -73,6 +73,7 @@ dependencies {
     implementation platform("com.google.firebase:firebase-bom:$versions.firebaseBom")
     implementation "com.google.firebase:firebase-analytics-ktx"
     implementation "com.google.firebase:firebase-messaging-ktx"
+    implementation "com.google.firebase:firebase-config-ktx"
 
     //circle imageView
     implementation "de.hdodenhof:circleimageview:$versions.circleImageView"

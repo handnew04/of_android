@@ -2,7 +2,9 @@ package kr.onekey.of.ui.splash
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import kr.onekey.of.R
 import kr.onekey.of.base.BaseActivity
@@ -21,22 +23,53 @@ class SplashActivity :
         super.onCreate(savedInstanceState)
 
         observe()
-        viewModel.checkAutoLogin()
+        viewModel.checkEssentialUpdate()
     }
 
     private fun observe() {
-        viewModel.succeedLogin.observe(this@SplashActivity) { succeedLogin ->
+        viewModel.apply {
+            succeedLogin.observe(this@SplashActivity) { succeedLogin ->
 
-            val intent: Intent =
-                if (succeedLogin) {
-                    Intent(this@SplashActivity, MainActivity::class.java)
+                val intent: Intent =
+                    if (succeedLogin) {
+                        Intent(this@SplashActivity, MainActivity::class.java)
+                    } else {
+                        Intent(this@SplashActivity, LoginActivity::class.java)
+                    }
+
+                startActivity(intent)
+                finish()
+            }
+            isSupportVersion.observe(this@SplashActivity) { isSupportVersion ->
+                if (isSupportVersion) {
+                    viewModel.checkAutoLogin()
                 } else {
-                    Intent(this@SplashActivity, LoginActivity::class.java)
+                    showVersionUpdateDialog()
                 }
-
-            startActivity(intent)
-            finish()
+            }
         }
     }
 
+    private fun showVersionUpdateDialog() {
+        AlertDialog.Builder(this).apply {
+            setTitle("필수 업데이트를 위해\n플레이 스토어로 이동합니다.")
+            setPositiveButton(
+                "확인"
+            ) { dialog, which ->
+                moveToPlayStore()
+                dialog.dismiss()
+            }
+        }.show()
+    }
+
+    private fun moveToPlayStore() {
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse(
+                "https://play.google.com/store/apps/details?id=${applicationContext.packageName}"
+            )
+            setPackage("com.android.vending")
+        }
+
+        startActivity(intent)
+    }
 }
