@@ -1,5 +1,6 @@
 package kr.onekey.of.network.api
 
+import kr.onekey.of.model.PhoneInfo
 import kr.onekey.of.model.UserInfo
 import kr.onekey.of.model.UserItem
 import okhttp3.ResponseBody
@@ -13,4 +14,9 @@ interface UserApi {
    @PUT("user/{id}")
    suspend fun updateUser(@Path("id") userId: Int, @Body userInfo: UserInfo): Response<ResponseBody>
 
+   @PUT("user/{id}/phone")
+   suspend fun updatePhone(
+      @Path("id") userId: Int,
+      @Body phoneInfo: PhoneInfo
+   ): Response<ResponseBody>
 }

@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kr.onekey.of.BuildConfig
 import kr.onekey.of.R
