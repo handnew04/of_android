@@ -56,6 +56,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.androidX"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$versions.androidX"
 
+    //coroutine extensions
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$versions.coroutinePlayService"
+
     //gson
     implementation "com.google.code.gson:gson:$versions.gson"
 

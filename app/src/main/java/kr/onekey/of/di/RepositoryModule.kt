@@ -7,7 +7,7 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val repositoryModule = module {
-   single { LoginRepository(get(), get(named(DI_PREF_UTIL))) }
+   single { LoginRepository(get(), get(), get(named(DI_PREF_UTIL))) }
    single { UserRepository(get()) }
    single { AuthRepository(get(), get(named(DI_PREF_UTIL))) }
 }

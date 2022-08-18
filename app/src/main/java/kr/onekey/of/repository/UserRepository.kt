@@ -11,9 +11,6 @@ class UserRepository(private val userApi: UserApi) : BaseRepository() {
 
    }
 
-   suspend fun updatePhone(userId: Int, phoneInfo: PhoneInfo) =
-      ApiHandler().apiCall { userApi.updatePhone(userId, phoneInfo) }
-
    suspend fun updateUser(userId: Int, userInfo: UserInfo) =
       ApiHandler().apiCall { userApi.updateUser(userId, userInfo) }
 
