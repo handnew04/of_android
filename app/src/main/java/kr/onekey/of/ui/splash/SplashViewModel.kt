@@ -9,7 +9,6 @@ import kotlinx.coroutines.withContext
 import kr.onekey.of.BuildConfig
 import kr.onekey.of.R
 import kr.onekey.of.base.BaseViewModel
-import kr.onekey.of.network.ResultWrapper
 import kr.onekey.of.repository.LoginRepository
 import kr.onekey.of.util.PrefUtil
 
@@ -23,21 +22,11 @@ class SplashViewModel(
    fun checkAutoLogin() {
       if (isAutoLoginUser()) {
          launch {
-            val response = loginRepository.login(prefUtil.getEmail()!!, prefUtil.getPassword()!!)
+            val isSuccessLogin =
+               loginRepository.login(prefUtil.getEmail()!!, prefUtil.getPassword()!!)
 
             withContext(Dispatchers.Main) {
-               when (response) {
-                  is ResultWrapper.Success -> {
-                     succeedLogin.value = true
-                     loginRepository.apply {
-                        saveId(response.value.userId)
-                        saveTokens(response.value.accessToken, response.value.refreshToken)
-                     }
-                  }
-                  is ResultWrapper.Error -> {
-                     succeedLogin.value = false
-                  }
-               }
+               succeedLogin.value = isSuccessLogin
             }
          }
       } else {

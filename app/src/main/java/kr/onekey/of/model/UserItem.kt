@@ -1,6 +1,7 @@
 package kr.onekey.of.model
 
 import com.google.gson.annotations.SerializedName
+import kr.onekey.of.base.BaseResponse
 import retrofit2.http.Url
 
 data class UserItem(
@@ -14,5 +15,4 @@ data class UserItem(
     val phoneNumber: String?,
     @SerializedName("email")
     val email: String
-) {
-}
+) : BaseResponse

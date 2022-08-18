@@ -1,13 +1,9 @@
 package kr.onekey.of.ui.login
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kr.onekey.of.base.BaseViewModel
-import kr.onekey.of.network.ResultWrapper
-import kr.onekey.of.network.exception.NotFoundUserException
 import kr.onekey.of.repository.LoginRepository
 
 class LoginViewModel(private val loginRepository: LoginRepository) :
@@ -36,25 +32,10 @@ class LoginViewModel(private val loginRepository: LoginRepository) :
 
 
       launch {
-         val response = loginRepository.login(inputId, inputPassword)
+         val isSuccessLogin = loginRepository.login(inputId, inputPassword)
 
          withContext(Dispatchers.Main) {
-            when (response) {
-               is ResultWrapper.Success -> {
-                  succeedLogin.value = true
-                  loginRepository.apply {
-                     saveId(response.value.userId)
-                     saveTokens(response.value.accessToken, response.value.refreshToken)
-                  }
-               }
-               is ResultWrapper.Error -> {
-                  if (response.exception == NotFoundUserException()) {
-                     Log.e(TAG, response.exception.message!!)
-                  }
-
-                  succeedLogin.value = false
-               }
-            }
+            succeedLogin.value = isSuccessLogin
          }
       }
    }
