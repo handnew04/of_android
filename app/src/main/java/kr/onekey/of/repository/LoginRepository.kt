@@ -63,7 +63,6 @@ class LoginRepository(
 
    private fun makePhoneInfo(fcmToken: String) = PhoneInfo(
       fcmId = fcmToken,
-      name = "이름이뭘까",
       appVersion = BuildConfig.VERSION_NAME,
       model = Build.MODEL,
       os = "ANDROID",

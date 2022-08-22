@@ -1,7 +1,6 @@
 package kr.onekey.of.repository
 
 import kr.onekey.of.base.BaseRepository
-import kr.onekey.of.model.PhoneInfo
 import kr.onekey.of.model.UserInfo
 import kr.onekey.of.network.ApiHandler
 import kr.onekey.of.network.api.UserApi

@@ -5,8 +5,6 @@ import com.google.gson.annotations.SerializedName
 data class PhoneInfo(
    @SerializedName("fcmId")
    val fcmId: String,
-   @SerializedName("name")
-   val name: String,
    @SerializedName("appVersion")
    val appVersion: String,
    @SerializedName("model")
