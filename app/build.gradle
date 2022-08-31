@@ -8,7 +8,7 @@ android {
     compileSdk versions.compileSdk
 
     defaultConfig {
-        applicationId "kr.onekey.of"
+        applicationId "kr.co.ollefarm"
         minSdk versions.minSdk
         targetSdk versions.compileSdk
         versionCode versions.versionCode
@@ -16,7 +16,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "WEB_URL", '"http://192.168.0.9:4100"')
+        buildConfigField("String", "WEB_URL", '"http://192.168.0.11:4100"')
     }
 
     buildTypes {

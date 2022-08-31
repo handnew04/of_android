@@ -6,7 +6,7 @@
 
       <variable
           name="viewModel"
-          type="kr.onekey.of.ui.main.MainViewModel" />
+          type="kr.co.ollefarm.ui.main.MainViewModel" />
    </data>
 
    <LinearLayout

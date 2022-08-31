@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="kr.onekey.of.ui.login.LoginViewModel" />
+            type="kr.co.ollefarm.ui.login.LoginViewModel" />
 
         <import type="android.view.View" />
     </data>
@@ -29,7 +29,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
-        <kr.onekey.of.ui.custom.EmailValidCheckEditText
+        <kr.co.ollefarm.ui.custom.EmailValidCheckEditText
             android:id="@+id/et_id"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_logo" />
 
-        <kr.onekey.of.ui.custom.PasswordEditText
+        <kr.co.ollefarm.ui.custom.PasswordEditText
             android:id="@+id/et_pw"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
