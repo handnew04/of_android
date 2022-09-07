@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 apply from: "$rootDir/dependencies.gradle"
 
 android {
@@ -16,7 +17,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "WEB_URL", '"http://192.168.0.11:4100"')
+        buildConfigField("String", "WEB_URL", '"http://192.168.123.111:4100"')
     }
 
     buildTypes {
@@ -77,6 +78,7 @@ dependencies {
     implementation "com.google.firebase:firebase-analytics-ktx"
     implementation "com.google.firebase:firebase-messaging-ktx"
     implementation "com.google.firebase:firebase-config-ktx"
+    implementation "com.google.firebase:firebase-crashlytics-ktx"
 
     //circle imageView
     implementation "de.hdodenhof:circleimageview:$versions.circleImageView"

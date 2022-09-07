@@ -3,6 +3,7 @@ package kr.co.ollefarm
 import android.app.Application
 import android.content.Intent
 import android.util.Log
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.messaging.FirebaseMessaging
 import kr.co.ollefarm.di.networkModule
 import kr.co.ollefarm.di.repositoryModule
@@ -25,21 +26,9 @@ class OFApplication : Application() {
          modules(listOf(networkModule, repositoryModule, viewModelModule, utilModule))
       }
 
-      //getFCMToken()
+      FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(isRelease())
    }
 
-   private fun getFCMToken() {
-      FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-         if (!task.isSuccessful) {
-            Log.w("Application", "Fetching FCM registration failed", task.exception)
-            return@addOnCompleteListener
-         }
-
-         val token = task.result
-
-         Log.e("Token", token)
-      }
-   }
 
    fun showLoginActivity() {
       val intent = Intent(this, LoginActivity::class.java)
@@ -50,4 +39,6 @@ class OFApplication : Application() {
       }
       startActivity(intent)
    }
+
+   private fun isRelease() = !BuildConfig.DEBUG
 }

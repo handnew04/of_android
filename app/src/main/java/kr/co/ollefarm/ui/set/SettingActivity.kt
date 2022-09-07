@@ -52,7 +52,9 @@ class SettingActivity :
    private fun setListeners() {
       binding.apply {
          ivProfile.setOnClickListener {
-            showDialog()
+            //showDialog()
+            // TODO: 수정 예정
+            Toast.makeText(this@SettingActivity, "준비 중 입니다.", Toast.LENGTH_SHORT).show()
          }
          tvSave.setOnClickListener {
 

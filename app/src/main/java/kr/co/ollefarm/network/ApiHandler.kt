@@ -1,6 +1,7 @@
 package kr.co.ollefarm.network
 
 import android.util.Log
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kr.co.ollefarm.network.exception.*
 import kr.co.ollefarm.network.exception.ApiBaseException.Companion.INVALID_TOKEN_EXCEPTION_CODE
 import kr.co.ollefarm.network.exception.ApiBaseException.Companion.NOT_FOUND_USER_EXCEPTION_CODE
@@ -26,19 +27,21 @@ class ApiHandler {
 
          return if (response.isSuccessful) {
             if (response.body() == null) {
-               Log.e("ApiCall", "response body is empty")
+               FirebaseCrashlytics.getInstance().log("ApiCall: response body is empty")
                ResultWrapper.Error(EmptyBodyException())
             } else {
-               Log.e("ApiCall", "successful notEmpty")
+               FirebaseCrashlytics.getInstance().log("ApiCall: response body : ${response.body()}")
                ResultWrapper.Success<T>(response.body()!!)
             }
          } else {
             val errorBody = response.errorBody()
-            Log.e("ApiCall response is not successful", errorBody?.string() ?: "errorBody is null")
+            FirebaseCrashlytics.getInstance()
+               .log("ApiCall response is not successful ${errorBody?.string()} ?: errorBody is null")
 
             ResultWrapper.Error(mapApiException(response.code()))
          }
       } catch (t: Throwable) {
+         FirebaseCrashlytics.getInstance().log("ApiCall Error : ${t.localizedMessage}")
          Log.e("ApiCalls", "Call error : ${t.localizedMessage}", t.cause)
          return ResultWrapper.Error(mapNetworkThrowable(t))
       }
@@ -57,7 +60,7 @@ class ApiHandler {
       }
    }
 
-   fun mapApiException(code: Int) : ApiBaseException {
+   fun mapApiException(code: Int): ApiBaseException {
       return when (code) {
          NOT_FOUND_USER_EXCEPTION_CODE -> {
             NotFoundUserException()

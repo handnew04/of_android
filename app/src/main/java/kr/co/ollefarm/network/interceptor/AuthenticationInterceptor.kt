@@ -1,6 +1,7 @@
 package kr.co.ollefarm.network.interceptor
 
 import android.content.Context
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kr.co.ollefarm.OFApplication
 import kr.co.ollefarm.network.exception.ApiBaseException.Companion.INVALID_TOKEN_EXCEPTION_CODE
 import kr.co.ollefarm.repository.AuthRepository
@@ -16,6 +17,8 @@ class AuthenticationInterceptor(private val context: Context) : Interceptor, Koi
    override fun intercept(chain: Interceptor.Chain): Response {
       val api = chain.request().url.toString().split("api/")[1]
       val accessToken = authRepository.getAccessToken()
+
+      FirebaseCrashlytics.getInstance().log("API : $api")
 
       return if (api != LOGIN_API) {
          val newRequest = chain.request().appendToken(accessToken)
