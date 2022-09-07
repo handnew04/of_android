@@ -26,6 +26,7 @@ android {
             //local
             //buildConfigField("String", "BASE_URL", '"http://192.168.0.136:3000/api/"')
             //remote
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("String", "BASE_URL", '"http://13.124.238.231:3000/api/"')
         }
         release {
